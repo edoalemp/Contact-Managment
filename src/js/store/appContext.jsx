@@ -1,6 +1,5 @@
 import React from "react";
 import getState from "./store.js";
-
 export const Context = React.createContext(null);
 
 const Store = PassedComponent => {
