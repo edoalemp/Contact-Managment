@@ -36,7 +36,6 @@ export default class Contacts extends React.Component {
                             </div>
                         </div>
                     )
-
                 }}
             </Context.Consumer>
 			<Modal show={this.state.showModal} onClose={() => this.setState({showModal: false})} />
