@@ -28,34 +28,38 @@ const getState = ({ getStore, setStore }) => {
             },
 
             createContact: (event)=>{
-                let elements = document.getElementById(event.target.id).elements
-                fetch("https://assets.breatheco.de/apis/fake/contact/", {
-					method: "POST",
-                    body:{
+                event.preventDefault();
+                let elements = document.getElementById(event.target.id);
+                let newcontact={
                         "full_name": elements[0].value,
                         "email": elements[1].value,
                         "agenda_slug": "miagenda",
-                        "address":elements[2].value,
-                        "phone":elements[3].value
-                    },
+                        "address": elements[2].value,
+                        "phone": elements[3].value
+                    };
+                fetch("https://assets.breatheco.de/apis/fake/contact/", {
+					method: "POST",
 					headers: {
 						"Content-Type": "application/json"
-					}
+					},
+                    body: JSON.stringify(newcontact),
 				})
 					.then(resp => {
 						return resp.json();
 					})
 					.then(data => {
-						/*setStore({
-							agenda: data
-						});*/
+						setStore({
+							contact: newcontact
+						});
+                        console.log(data)
 					})
 					.catch(error => {
 						console.log(error);
 					});
                 },
+            updateContact: ()=>{},
             deleteContact: ()=>{},
-            canDeleteIt: ()=>{},
+            
 
 			//(Arrow) Functions that update the Store
             // Remember to use the scope: scope.state.store & scope.setState()

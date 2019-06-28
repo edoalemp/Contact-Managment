@@ -29,7 +29,7 @@ export default class AddContact extends React.Component {
                                         <input type="text" className="form-control" placeholder="Enter address" key="address" />
                                     </div>
                                     <button type="submit" className="btn btn-primary form-control">save</button>
-                                    <Link className="mt-3 w-100 text-center" to="/">or get back to contacts</Link>
+                                    <Link className="mt-3 w-100 text-center" to="/" onClick={()=>actions.getAgenda("https://assets.breatheco.de/apis/fake/contact/agenda/miagenda")}>or get back to contacts</Link>
                                 </form >
                             </div>
                         </div>

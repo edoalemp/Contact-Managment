@@ -5,8 +5,8 @@ import Modal from '../components/Modal';
 import {Context} from "../store/appContext";
 
 export default class Contacts extends React.Component {
-	constructor(){
-		super();
+	constructor(props){
+		super(props);
 		this.state = {
 			showModal: false
 		};
@@ -17,7 +17,12 @@ export default class Contacts extends React.Component {
 		<div className="container">
             <Context.Consumer>
                 {({ store, actions }) => {
-
+                    let arrayhtml=[];
+                    if (store.agenda.length>0){
+                        for (let contacti=0; contacti<=store.agenda.length-1;contacti++){
+                            arrayhtml.push(<ContactCard contact={store.agenda[contacti]} onDelete={() => this.setState({ showModal: true})} />);
+                        }
+                    }
                     return (
                         <div>
                             <p className="text-right my-3">
@@ -26,10 +31,7 @@ export default class Contacts extends React.Component {
                             </p>
                             <div id="contacts" className="panel-collapse collapse show" aria-expanded="true">
                                 <ul className="list-group pull-down" id="contact-list">
-                                    <ContactCard onDelete={() => this.setState({ showModal: true})} />
-                                    <ContactCard />
-                                    <ContactCard />
-                                    <ContactCard />
+                                    {arrayhtml}
                                 </ul>
                             </div>
                         </div>
