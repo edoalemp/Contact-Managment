@@ -1,15 +1,16 @@
 import React from 'react';
 import {withRouter} from 'react-router-dom';
 import PropTypes from 'prop-types';
+import {Context} from "../store/appContext";
 
 class Modal extends React.Component{
-	constructor(){
-		super();
+	constructor(props){
+		super(props);
 		this.state = {
 				// Initialize your state
 		};
 	}
-		
+
 	render(){
 		return (
 			<div className="modal" tabIndex="-1" role="dialog" style={{display: (this.props.show) ? 'inline-block' : 'none'}}>
@@ -27,16 +28,21 @@ class Modal extends React.Component{
 						<div className="modal-body">
 							<p>Warning: unknown consequences after this point... Kidding!</p>
 						</div>
+
 						<div className="modal-footer">
-							<button type="button" className="btn btn-primary" onClick>Oh no!</button>
-							<button type="button" className="btn btn-secondary" data-dismiss="modal">Do it!</button>
-						</div>
+							<button type="button" className="btn btn-primary" onClick={() => this.props.onClose()}>Oh no!</button>
+                            <Context.Consumer>
+                            {({ store, actions }) => {
+							    return (<button type="button" className="btn btn-secondary" data-dismiss="modal" onClick={() => {this.props.onClose()} }>Do it!</button>)}}
+                            </Context.Consumer>
+                        </div>
+
 					</div>
 				</div>
 			</div>
 		);
 	}
-		
+
 }
 /**
  * Define the data-types for

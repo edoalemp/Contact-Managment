@@ -90,8 +90,31 @@ const getState = ({ getStore, setStore }) => {
 						console.log(error);
 					});
                 },
-            deleteContact: ()=>{},
+            deleteContact: (event,obj)=>{
+                event.preventDefault();
+                console.log(obj);
 
+
+                fetch("https://assets.breatheco.de/apis/fake/contact/"+obj["id"], {
+					method: "DELETE",
+					headers: {
+						"Content-Type": "application/json"
+					},
+
+				})
+					.then(resp => {
+						return resp.json();
+					})
+					.then(data => {
+						setStore({
+							contact:data
+						});
+                        console.log(data)
+					})
+					.catch(error => {
+						console.log(error);
+					});
+                },
 
 			//(Arrow) Functions that update the Store
             // Remember to use the scope: scope.state.store & scope.setState()

@@ -1,6 +1,7 @@
 import React from 'react';
 import {withRouter} from 'react-router-dom';
 import PropTypes from 'prop-types';
+import {Context} from "../store/appContext";
 
 class ContactCard extends React.Component{
 	constructor(props){
@@ -21,8 +22,17 @@ class ContactCard extends React.Component{
 					<div className="col-12 col-sm-6 col-md-9 text-center text-sm-left">
 						<div className=" float-right">
 							<button className="btn" onClick={() => this.props.history.push('/edit/'+this.props.i)}><i className="fas fa-pencil-alt mr-3"></i></button>
-							<button className="btn" onClick={() => this.props.onDelete()}><i className="fas fa-trash-alt"></i></button>
-						</div>
+
+                            <Context.Consumer>
+                            {({ store, actions }) =>{
+                                return(
+							        <button className="btn" onClick={() => {actions.deleteContact(event,store.agenda[this.props.i]);this.props.onDelete()}}><i className="fas fa-trash-alt"></i></button>
+                                )}
+                             }
+                            </Context.Consumer>
+
+
+                        </div>
 						<label className="name lead">{this.props.contact["full_name"]}</label>
 						<br />
 						<i className="fas fa-map-marker-alt text-muted mr-3"></i>
