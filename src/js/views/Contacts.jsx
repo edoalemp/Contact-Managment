@@ -13,20 +13,23 @@ export default class Contacts extends React.Component {
 	}
 
 	render() {
+
 	return (
+
 		<div className="container">
             <Context.Consumer>
                 {({ store, actions }) => {
+                    console.log(store);
                     let arrayhtml=[];
                     if (store.agenda.length>0){
                         for (let contacti=0; contacti<=store.agenda.length-1;contacti++){
-                            arrayhtml.push(<ContactCard contact={store.agenda[contacti]} onDelete={() => this.setState({ showModal: true})} />);
+                            arrayhtml.push(<ContactCard key={contacti} i={contacti} contact={store.agenda[contacti]} onDelete={() => this.setState({ showModal: true})} />);
                         }
                     }
                     return (
                         <div>
                             <p className="text-right my-3">
-                                <Link className="btn btn-success" to="/add">Add new contact</Link>
+                                <Link className="btn btn-success" to="/add" >Add new contact</Link>
                                 <Link className="btn btn-success"to="/" onClick={()=>actions.getAgenda("https://assets.breatheco.de/apis/fake/contact/agenda/miagenda")}>Get Agenda</Link>
                             </p>
                             <div id="contacts" className="panel-collapse collapse show" aria-expanded="true">

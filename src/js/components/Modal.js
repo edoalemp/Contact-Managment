@@ -28,7 +28,7 @@ class Modal extends React.Component{
 							<p>Warning: unknown consequences after this point... Kidding!</p>
 						</div>
 						<div className="modal-footer">
-							<button type="button" className="btn btn-primary">Oh no!</button>
+							<button type="button" className="btn btn-primary" onClick>Oh no!</button>
 							<button type="button" className="btn btn-secondary" data-dismiss="modal">Do it!</button>
 						</div>
 					</div>
