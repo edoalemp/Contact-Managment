@@ -60,7 +60,6 @@ const getState = ({ getStore, setStore }) => {
             modifyContact: (event, obj)=>{
                 event.preventDefault();
                 const tempstore = getStore();
-                console.log(tempstore.agenda);
                 let elements = document.getElementById(event.target.id);
                 let newcontact={
                         "full_name": elements[0].value,
@@ -90,11 +89,17 @@ const getState = ({ getStore, setStore }) => {
 						console.log(error);
 					});
                 },
+            getContact: (obj)=>{
+                setStore({contact:obj})
+            },
             deleteContact: (event,obj)=>{
-                event.preventDefault();
-                console.log(obj);
-
-
+                let tempstore = getStore();
+                for (let i=0;i<=tempstore.agenda.length-1;i++){
+                    if (tempstore.agenda[i]["id"]===obj["id"]){
+                        tempstore.agenda.splice(i,1);
+                        break;
+                    }
+                }
                 fetch("https://assets.breatheco.de/apis/fake/contact/"+obj["id"], {
 					method: "DELETE",
 					headers: {
@@ -106,8 +111,10 @@ const getState = ({ getStore, setStore }) => {
 						return resp.json();
 					})
 					.then(data => {
+
 						setStore({
-							contact:data
+                            agenda: tempstore.agenda,
+							contact: data
 						});
                         console.log(data)
 					})

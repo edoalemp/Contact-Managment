@@ -22,16 +22,7 @@ class ContactCard extends React.Component{
 					<div className="col-12 col-sm-6 col-md-9 text-center text-sm-left">
 						<div className=" float-right">
 							<button className="btn" onClick={() => this.props.history.push('/edit/'+this.props.i)}><i className="fas fa-pencil-alt mr-3"></i></button>
-
-                            <Context.Consumer>
-                            {({ store, actions }) =>{
-                                return(
-							        <button className="btn" onClick={() => {actions.deleteContact(event,store.agenda[this.props.i]);this.props.onDelete()}}><i className="fas fa-trash-alt"></i></button>
-                                )}
-                             }
-                            </Context.Consumer>
-
-
+							<button className="btn" onClick={() => {this.props.onDelete(this.props.i)}}><i className="fas fa-trash-alt"></i></button>
                         </div>
 						<label className="name lead">{this.props.contact["full_name"]}</label>
 						<br />

@@ -23,7 +23,7 @@ export default class Contacts extends React.Component {
                     let arrayhtml=[];
                     if (store.agenda.length>0){
                         for (let contacti=0; contacti<=store.agenda.length-1;contacti++){
-                            arrayhtml.push(<ContactCard key={contacti} i={contacti} contact={store.agenda[contacti]} onDelete={() => {this.setState({ showModal: true})}} />);
+                            arrayhtml.push(<ContactCard key={contacti} i={contacti} contact={store.agenda[contacti]} onDelete={() => {this.setState({ showModal: true});actions.getContact(store.agenda[contacti]);}} />);
                         }
                     }
                     return (

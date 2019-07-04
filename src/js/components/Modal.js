@@ -33,7 +33,7 @@ class Modal extends React.Component{
 							<button type="button" className="btn btn-primary" onClick={() => this.props.onClose()}>Oh no!</button>
                             <Context.Consumer>
                             {({ store, actions }) => {
-							    return (<button type="button" className="btn btn-secondary" data-dismiss="modal" onClick={() => {this.props.onClose()} }>Do it!</button>)}}
+							    return (<button type="button" className="btn btn-secondary" data-dismiss="modal" onClick={() => {actions.deleteContact(event,store.contact); return this.props.onClose() } }>Do it!</button>)}}
                             </Context.Consumer>
                         </div>
 
